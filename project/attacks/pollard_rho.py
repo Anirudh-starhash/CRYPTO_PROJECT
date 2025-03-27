@@ -6,8 +6,6 @@ class POLLARD_RHO:
         self.H=H
         self.P=P
         
-        self.pollard(self.G,self.H,self.P)
-        
         
         
 
@@ -107,11 +105,14 @@ class POLLARD_RHO:
         if denom == 0:
             raise ValueError("Denominator is zero; failure in collision step.")
 
-        res = (mod_inverse(denom, Q) * nom) % Q
+        try:
+            res = (mod_inverse(denom, Q) * nom) % Q
 
-        # Verify and return the correct result
-        if self.verify(G, H, P, res):
-            return res
+            # Verify and return the correct result
+            if self.verify(G, H, P, res):
+                return res
 
-        return res + Q
+            return res + Q,True
+        except Exception as e:
+            return e,False
 

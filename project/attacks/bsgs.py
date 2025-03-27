@@ -5,8 +5,6 @@ class BSGS:
         self.g=g
         self.h=h
         self.p=p
-        
-        self.bsgs(self.g,self.h,self.p)
 
     def bsgs(self,g, h, p):
         '''
@@ -25,7 +23,7 @@ class BSGS:
         for j in range(N):
             y = (h * pow(c, j, p)) % p
             if y in tbl:
-                return j * N + tbl[y]
+                return j * N + tbl[y],True
 
         # Solution not found
-        return None
+        return None,False

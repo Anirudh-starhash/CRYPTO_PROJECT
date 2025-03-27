@@ -1,6 +1,6 @@
 # attacker
 from attacks import dlp_nfs,bsgs,dlp_shor,pohling_hellman_final,pollard_rho,shor_algo,grovers
-
+import time
 class Monitor:
     
     def __init__(self):
@@ -11,7 +11,7 @@ class Monitor:
             "DLP_NFS" : dlp_nfs.DLP_NFS(),
             "BSGS" : bsgs.BSGS(),
             "DLP_SHOR" :  dlp_shor.DLP_SHOR(),
-            "POHLING_HELLMAN": pohling_hellman_final.POHLING_HELLMAN(),
+            "POHLIG_HELLMAN": pohling_hellman_final.POHLING_HELLMAN(),
             "POLLARD_RHO": pollard_rho.POLLARD_RHO(),
             "SHOR": shor_algo.SHOR(),
             "GROVER":  grovers.GROVER()
@@ -23,8 +23,9 @@ class Monitor:
         
     def caller(self,diffie_hellmann_pairs):
         for x in self.AttackBuffer:
-            if x in ['DLP_NFS','BSGS',"POHLING_HELLMAN","POLLARD_RHO"]:
-                print("For the Five Pairs Let's simulate NFS Attack")
+            if x in ['DLP_NFS','BSGS',"POHLIG_HELLMAN","POLLARD_RHO"]:
+                time.sleep(1)
+                print(f"For the Five Pairs Let's simulate {x}Attack")
                 
                 i=0
                 for y in diffie_hellmann_pairs:
@@ -33,16 +34,33 @@ class Monitor:
                     p=diffie_hellmann_pairs[y]['P']
                     Yb=diffie_hellmann_pairs[y]['Yb']
                     
-                    Xa=self.AttackBuffer[x](g,h,p)
+                    instance=self.AttackBuffer[x]
+                    Xa=0
+                    R=True
+                    if x=="DLP_NFS":
+                        R,Xa=instance.nfs(g,h,p)
+                       
+                        
+                    elif x=="POLLARD_RHO":
+                        Xa,R=instance.pollard(g,h,p)
+                        
+                    elif x=="POHLIG_HELLMAN":
+                        Xa,R=instance.pohlig_hellman(g,h,p)
+                        
+                    else:
+                        Xa,R=instance.bsgs(g,h,p)
                     
                     ''' Now use the Xa with Yb to get shared key'''
                     
-                    K=pow(Yb,Xa,p)
-                    
-                    if K==diffie_hellmann_pairs[y]['K']:
-                        print(f"Iteration - {i} Diffie Hellmann Compromised using NFS!")
-                        print(f"The shared key we got with attack is {diffie_hellmann_pairs[y]['K']}")
+                    if R==False:
+                        print("There is no log so unabe to break for this case")
+                    else:
+                        K=pow(Yb,Xa,p)
                         
+                        if K==diffie_hellmann_pairs[y]['K']:
+                            print(f"Iteration - {i} Diffie Hellmann Compromised using {x}!")
+                            print(f"The shared key we got with attack is {diffie_hellmann_pairs[y]['K']}")
+                    i+=1
             else:
                 pass
         
@@ -51,8 +69,8 @@ class Monitor:
 diffie_hellmann_pairs={
     
     '0': {
-        'Ya':203,
-        'Yb':270,
+        'Ya':270,
+        'Yb':203,
         'alpha':3,
         'P':253,
         'k':141
@@ -84,6 +102,13 @@ diffie_hellmann_pairs={
         'alpha':2,
         'P':523,
         'K':37
+    },
+    '5':{
+        'alpha':2,
+        'Ya':11,
+        'P':59,
+        'Yb':56,
+        'K':8
     }
 }
 

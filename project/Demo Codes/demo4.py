@@ -131,12 +131,12 @@ class MonitorT:
 # Example Run
 if __name__ == "__main__":
     # Simulated Diffie-Hellman exchange
-    p = 5# A prime number
+    p = 853# A prime number
     alpha = 3  # Generator
     
 
-    Y_A = 4
-    Y_B=350
+    Y_A = 329
+    Y_B=763
 
     print(f"Diffie-Hellman Exchange:")
     print(f"   Public P: {p}, Alpha: {alpha}")

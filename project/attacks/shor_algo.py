@@ -15,7 +15,7 @@ import numpy as np
 
 class SHOR:
     def __init__(self):
-        self.shor_algorithm()
+       pass
 
     def check_if_power(self,N):
         """ Check if N is a perfect power in O(n^3) time, n=ceil(logN) """

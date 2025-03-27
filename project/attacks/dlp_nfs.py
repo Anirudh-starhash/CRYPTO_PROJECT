@@ -13,8 +13,6 @@ class DLP_NFS:
         self.g=g
         self.h=h
         self.p=p
-        
-        self.nfs(self.g,self.h,self.p)
 
     def BaseMExpansion(self,n,m):
         result = []
@@ -310,5 +308,10 @@ class DLP_NFS:
                             print(f"Factors found: {g1} and {g2}")
                             non_trivial_factorizations += 1
         #print(f"Non-trivial factorizations: {non_trivial_factorizations}")
-        return discrete_log(p, h, g)
+        try:
+            x1=discrete_log(p,h,g)
+            return True,x1
+        except Exception as e:
+            return False, str(e)
+        
 

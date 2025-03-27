@@ -5,8 +5,6 @@ class POHLING_HELLMAN:
         self.g=g
         self.h=h
         self.p=p
-        
-        self.pohlig_hellman(self.g, self.h, self.p)
 
     def discrete_log_prime_power(self,g, h, p, q, e):
         """
@@ -66,10 +64,15 @@ class POHLING_HELLMAN:
             qe = q**e
             gq = pow(g, order // qe, p)
             hq = pow(h, order // qe, p)
+            try:
+                xq = self.discrete_log_prime_power(gq, hq, p, q, e)
 
-            xq = self.discrete_log_prime_power(gq, hq, p, q, e)
-
-            congruences.append(xq)
-            moduli.append(qe)
-
-        return self.chinese_remainder_theorem(congruences, moduli)
+                congruences.append(xq)
+                moduli.append(qe)
+            except Exception as e:
+                return e,False
+        try:
+            x1=self.chinese_remainder_theorem(congruences, moduli)
+            return x1,True
+        except Exception as e:
+            return e,False

@@ -21,8 +21,6 @@ class GROVER:
         self.marked_states=marked_states
         self.iterations=iterations
         
-        self.grovers(self.n,self.marked_states,self.iterations)
-        
 
     def initialize_s(self,qc, qubits):
         """Apply a H-gate to 'qubits' in qc"""

@@ -14,8 +14,6 @@ class DLP_SHOR:
         self.b=b
         self.g=g
         self.p=p
-        
-        self.dlp_shor(self.b,self,g,self.p)
 
     def phi_addition_cc(self,n, b, factor):
         """Double controlled addition in fourier space:
