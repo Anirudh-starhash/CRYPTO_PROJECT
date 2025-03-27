@@ -422,7 +422,7 @@ def begin():
     '''
     
     time.sleep(1)
-    print("Creating Two threads One for Diffie Hellmann and One for BB84")
+    print("Creating 4 threads One for Diffie Hellmann and One for BB84 and One for RSA and One for ORB")
     
     ''' Start both cryptographic threads '''
     
