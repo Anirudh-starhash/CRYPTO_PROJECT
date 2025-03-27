@@ -1,0 +1,6 @@
+socket
+threading
+numpy
+matplotlib
+qiskit
+qiskit-ibm-runtime
