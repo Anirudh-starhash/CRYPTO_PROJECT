@@ -1,7 +1,7 @@
 from math import ceil, sqrt
 
 class BSGS:
-    def __init__(self,g,h,p):
+    def __init__(self,g=None,h=None,p=None):
         self.g=g
         self.h=h
         self.p=p

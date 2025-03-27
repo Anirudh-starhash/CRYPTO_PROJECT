@@ -10,7 +10,7 @@ from fractions import Fraction
 from qiskit_aer import AerSimulator
 
 class DLP_SHOR:
-    def __init__(self,b,g,p):
+    def __init__(self,b=None,g=None,p=None):
         self.b=b
         self.g=g
         self.p=p

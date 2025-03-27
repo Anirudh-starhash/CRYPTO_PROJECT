@@ -1,12 +1,13 @@
 from sympy import mod_inverse
 
 class POLLARD_RHO:
-    def __init__(self,G, H, P):
+    def __init__(self,G=None, H=None, P=None):
         self.G=G
         self.H=H
         self.P=P
         
         self.pollard(self.G,self.H,self.P)
+        
         
         
 

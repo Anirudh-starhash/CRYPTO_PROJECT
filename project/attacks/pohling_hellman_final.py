@@ -1,7 +1,7 @@
 from sympy import factorint, mod_inverse
 
 class POHLING_HELLMAN:
-    def __init__(self,g, h, p):
+    def __init__(self,g=None, h=None, p=None):
         self.g=g
         self.h=h
         self.p=p

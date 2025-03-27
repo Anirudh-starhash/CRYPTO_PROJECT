@@ -16,7 +16,7 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.circuit.library import HGate, XGate, MCXGate
 
 class GROVER:
-    def __init__(self,n, marked_states, iterations=None):
+    def __init__(self,n=None, marked_states=None, iterations=None):
         self.n=n
         self.marked_states=marked_states
         self.iterations=iterations
